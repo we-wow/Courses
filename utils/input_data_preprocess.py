@@ -21,7 +21,7 @@ class Graph:
             self.edges = unsorted_edge[np.lexsort((unsorted_edge[:, 0],))]
         # Number of edges and vertexes
         self.edges_number = self.edges.shape[0]
-        self.vertex_number = np.max(self.edges[:, 1] + 1)
+        self.vertex_number = int(np.max(self.edges[:, 1:3]) + 1)
         # Generate a incidence matrix
         self.incidence_matrix = self.generate_incidence_matrix()
 
