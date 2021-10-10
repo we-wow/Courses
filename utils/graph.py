@@ -1,10 +1,10 @@
 """
-
+This is the core algorithm of tree searching
 @Time   : 2021/9/30 12:27
 @Author : Wei Mingjiang
-@File   : input_data_preprocess.py
-@Version: 1.0.0
-@Content: 
+@File   : graph.py
+@Version: 1.0.1
+@Content: Fixed bug and add some notes
 """
 import csv
 import numpy as np
@@ -28,7 +28,7 @@ class Graph:
     def generate_incidence_matrix(self):
         """
         Generate the incidence matrix of the Graph.
-        :return:
+        :return: numpy.ndarray, incidence matrix
         """
         incidence_matrix = np.zeros(shape=(self.vertex_number, self.edges_number))
         for edge in self.edges:
@@ -53,6 +53,12 @@ class Graph:
         return spanning_trees
 
     def generate_fundamental_cut_set_matrix(self, tree=None):
+        """
+        Generate a fundamental cut-set matrix with a given tree.
+        If not given, the program will choose a tree randomly.
+        :param tree: set object, the tree corresponding to matrix "Bf".
+        :return: numpy.ndarray and a set, the fundamental cut-set matrix and the corresponding tree
+        """
         if tree is None:
             # If there isn't a given tree, then we need to find a tree first.
             for cols in itertools.combinations(range(self.edges_number), self.vertex_number - 1):
@@ -117,6 +123,11 @@ class Graph:
         return fundamental_cut_set_matrix, tree
 
     def find_all_spanning_tree_by_polynomial(self, initial_tree=None):
+        """
+        Find all spanning trees by polynomial method.
+        :param initial_tree: set, the initial tree. If not given, program will find a tree.
+        :return: list[set], all trees in a list.
+        """
         if initial_tree is not None and np.linalg.det(self.incidence_matrix[:self.vertex_number - 1,
                                                       :].take([_-1 for _ in initial_tree], 1)) == 0:
             raise ValueError(f'Initial set {initial_tree} is not a spanning tree')

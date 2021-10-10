@@ -1,16 +1,7 @@
-# This is a sample Python script.
+from utils.graph import Graph
 
-# Press F5 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+g = Graph(topology_file_path='data/example2.csv')
+all_tree_1 = g.find_all_spanning_tree_by_polynomial(initial_tree={1, 4, 5})
+all_tree_2 = g.find_all_spanning_tree_by_iteration()
+print(all_tree_1)
+print(all_tree_2)
