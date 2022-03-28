@@ -84,7 +84,7 @@ class MonkAndSavage:
 
 
 if __name__ == '__main__':
-    game = MonkAndSavage(total_monk=20, total_savage=20, boat_capacity=4)
+    game = MonkAndSavage(total_monk=3, total_savage=3, boat_capacity=2)
     res, time_used = game.a_star_search()
     if not res:
         print("Solution Not Found")
